@@ -21,6 +21,14 @@ import Playlist from '../Playlist/Playlist';
         {name: 'playlistName2', artist: 'playlistArtist2', album: 'playlistAlbum2', id: 5},
         {name: 'playlistName3', artist: 'playlistArtist3', album: 'playlistAlbum3', id: 6}]
     }
+    this.addTrack = this.addTrack.bind(this);
+  }
+  addTrack(track) {
+    let playlistTRKS = this.state.playlistTracks.some(singleTrack => singleTrack.id === track.id)
+    if (playlistTRKS === false) {
+      this.state.playlistTracks.push(track)
+      this.setState({playlistTracks: this.state.playlistTracks})
+    }
   }
   render() {
     return (
@@ -29,7 +37,8 @@ import Playlist from '../Playlist/Playlist';
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} />
+            <SearchResults searchResults={this.state.searchResults} 
+                            onAdd={this.addTrack}/>
             <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
           </div>
         </div>
