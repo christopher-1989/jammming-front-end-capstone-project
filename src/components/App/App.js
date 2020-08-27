@@ -22,6 +22,7 @@ import Playlist from '../Playlist/Playlist';
         {name: 'playlistName3', artist: 'playlistArtist3', album: 'playlistAlbum3', id: 6}]
     }
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
   }
   addTrack(track) {
     let playlistTRKS = this.state.playlistTracks.some(singleTrack => singleTrack.id === track.id)
@@ -29,6 +30,15 @@ import Playlist from '../Playlist/Playlist';
       this.state.playlistTracks.push(track)
       this.setState({playlistTracks: this.state.playlistTracks})
     }
+  }
+  removeTrack(track) {
+    //Step 49
+    let updatedPlaylist = this.state.playlistTracks.map(singleTrack => {
+      if (singleTrack.id !== track.id) {
+        return singleTrack
+      }
+    })
+    this.setState({playlistTracks: updatedPlaylist})
   }
   render() {
     return (
